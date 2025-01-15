@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="com.griffin.core.utils.StringUtilsKt" />
+        <import type="com.griffin.core.utils.TimeUtils"/>
+
+        <variable
+            name="item"
+            type="com.griffin.core.data.model.BillModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="15dp"
+            android:text="@{TimeUtils.INSTANCE.toFriendlyTime(item.createTime, TimeUtils.FORMAT_YYYY_MM_DD)}"
+            android:textColor="@color/color_text_hint"
+            android:textSize="13sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="今天" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:src="@drawable/base_ic_selector_arrow_down"
+            android:tint="@color/color_text_hint"
+            app:layout_constraintBottom_toBottomOf="@id/tv_date"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_date" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_income"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            android:ellipsize="end"
+            android:gravity="end"
+            android:maxLines="1"
+            android:text="@{`收入：` + StringUtilsKt.f2yLast(item.income)}"
+            android:textColor="@color/color_text_hint"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toTopOf="@id/tv_expenses"
+            app:layout_constraintEnd_toStartOf="@id/iv_arrow"
+            app:layout_constraintStart_toEndOf="@id/tv_date"
+            app:layout_constraintTop_toTopOf="@id/tv_date"
+            tools:text="收入：100.00￥" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_expenses"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:gravity="end"
+            android:maxLines="1"
+            android:text="@{`支出：` + StringUtilsKt.f2yLast(item.expenses)}"
+            android:textColor="@color/color_text_hint"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@id/tv_date"
+            app:layout_constraintEnd_toEndOf="@id/tv_income"
+            app:layout_constraintStart_toStartOf="@id/tv_income"
+            app:layout_constraintTop_toBottomOf="@id/tv_income"
+            tools:text="支出：100.00￥" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
